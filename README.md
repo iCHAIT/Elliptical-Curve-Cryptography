@@ -21,10 +21,8 @@ In point multiplication a point P on the elliptic curve is multiplied with a **s
 i.e. **kP=Q**
 
 Point multiplication is achieved by two basic elliptic curve operations
-    * **Point addition**, adding two points J and K to obtain another point L.
-      **(L = J + K)**
-    * **Point doubling**, adding a point J to itself to obtain another point L.
-      **(L = 2J)**
+    * **Point addition**, adding two points J and K to obtain another point L, i.e  **(L = J + K)**
+    * **Point doubling**, adding a point J to itself to obtain another point L, i.e **(L = 2J)**
 
 
 * **Point Addition**
@@ -33,7 +31,7 @@ Point addition is the addition of two points J and K on an elliptic curve to obt
 
 ![ScreenShot](/images/pointadd.png)
 
-Consider two points J and K on an elliptic curve as shown in the above figure. If K != -J then a line drawn through the points J and K will intersect the elliptic curve at exactly one more point –L. The reflection of the point –L with respect to x-axis gives the point L, which is the result of addition of points J and K.
+Consider two points J and K on an elliptic curve as shown in the above figure. If K ≠ -J then a line drawn through the points J and K will intersect the elliptic curve at exactly one more point –L. The reflection of the point –L with respect to x-axis gives the point L, which is the result of addition of points J and K.
 
 Thus on an **elliptic curve L = J + K**.
 
