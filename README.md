@@ -1,8 +1,6 @@
 ## Elliptical Curve Cryptography
 
 
-* **ECC**
-
 Elliptic Curve Cryptography (ECC) is a **public key cryptography**. 
 
 ![ScreenShot](/images/publickey.png)
@@ -14,7 +12,7 @@ The mathematical operations of ECC is defined over the elliptic curve **y2 = x3 
 One main **advantage** of ECC is its **small key size**. A 160-bit key in ECC is considered to be as secured as 1024-bit key in RSA.
 
 
-* **Point Multiplication**
+## Point Multiplication
 
 In point multiplication a point P on the elliptic curve is multiplied with a **scalar k** using elliptic curve equation to obtain another point Q on the same elliptic curve.
 
@@ -25,7 +23,7 @@ Point multiplication is achieved by two basic elliptic curve operations
 * **Point doubling**, adding a point J to itself to obtain another point L, i.e **(L = 2J)**
 
 
-* **Point Addition**
+### Point Addition
 
 Point addition is the addition of two points J and K on an elliptic curve to obtain another point L on the same elliptic curve.
 
@@ -36,7 +34,7 @@ Consider two points J and K on an elliptic curve as shown in the above figure. I
 Thus on an **elliptic curve L = J + K**.
 
 
-* **Point Doubling**
+### Point Doubling
 
 Point doubling is the addition of a point J on the elliptic curve to itself to obtain another point L on the same elliptic curve.
 
