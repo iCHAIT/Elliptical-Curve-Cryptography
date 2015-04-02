@@ -21,8 +21,8 @@ In point multiplication a point P on the elliptic curve is multiplied with a **s
 i.e. **kP=Q**
 
 Point multiplication is achieved by two basic elliptic curve operations
-    * **Point addition**, adding two points J and K to obtain another point L, i.e  **(L = J + K)**
-    * **Point doubling**, adding a point J to itself to obtain another point L, i.e **(L = 2J)**
+*  **Point addition**, adding two points J and K to obtain another point L, i.e  **(L = J + K)**
+* **Point doubling**, adding a point J to itself to obtain another point L, i.e **(L = 2J)**
 
 
 * **Point Addition**
