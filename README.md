@@ -5,7 +5,7 @@
 
 Elliptic Curve Cryptography (ECC) is a **public key cryptography**. 
 
-//image of public key
+![ScreenShot](/images/publickey.png)
 
 In public key cryptography each user or the device taking part in the communication generally have a pair of keys, a **public key** and a **private key**, and a set of operations associated with the keys to do the cryptographic operations. Only the particular user knows the private key whereas the public key is distributed to all users taking part in the communication.
 
@@ -31,7 +31,7 @@ Point multiplication is achieved by two basic elliptic curve operations
 
 Point addition is the addition of two points J and K on an elliptic curve to obtain another point L on the same elliptic curve.
 
-//image of point addition
+![ScreenShot](/images/pointadd.png)
 
 Consider two points J and K on an elliptic curve as shown in the above figure. If K != -J then a line drawn through the points J and K will intersect the elliptic curve at exactly one more point –L. The reflection of the point –L with respect to x-axis gives the point L, which is the result of addition of points J and K.
 
@@ -42,7 +42,7 @@ Thus on an **elliptic curve L = J + K**.
 
 Point doubling is the addition of a point J on the elliptic curve to itself to obtain another point L on the same elliptic curve.
 
-//image of point doubling
+![ScreenShot](/images/pointmult.png)
 
 To double a point J to get L, i.e. to find L = 2J, consider a point J on an elliptic curve as shown in the above figure. If y coordinate of the point J is not zero then the tangent line at J will intersect the elliptic curve at exactly one more point –L. The reflection of the point –L with respect to x-axis gives the point L, which is the result of doubling the point J.
 
