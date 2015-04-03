@@ -7,6 +7,8 @@ Elliptic Curve Cryptography (ECC) is a **public key cryptography**.
 
 In public key cryptography each user or the device taking part in the communication generally have a pair of keys, a **public key** and a **private key**, and a set of operations associated with the keys to do the cryptographic operations. Only the particular user knows the private key whereas the public key is distributed to all users taking part in the communication.
 
+The public key is a point on the curve and the private key is a random number. The public key is obtained by multiplying the private key with a generator point G in the curve.
+
 The mathematical operations of ECC is defined over the elliptic curve **y2 = x3 + ax + b**, where **4a3 + 27b2 ≠ 0**. Each value of the ‘a’ and ‘b’ gives a different elliptic curve.
 
 One main **advantage** of ECC is its **small key size**. A 160-bit key in ECC is considered to be as secured as 1024-bit key in RSA.
@@ -108,12 +110,63 @@ ElGamal encryption is unconditionally malleable, and therefore is not secure und
 To achieve chosen-ciphertext security, the scheme must be further modified, or an appropriate padding scheme must be used.
 
 
+
 ![ScreenShot](/images/elgamal.png)
+
+
+
+## ECDSA(Elliptic Curve Digital Signature Algorithm)
+
+Signature algorithm is used for authenticating a device or a message sent by the device. For example consider two devices A and B. To authenticate a message sent by A, the device A **signs the message using its private key**. The device A sends the message and the signature to the device B. This signature can be **verified only by using the public key** of device A. Since the device B knows A’s public key, it can verify whether the message is indeed send by A or not.
+
+ECDSA is a variant of the **Digital Signature Algorithm (DSA)** that operates on elliptic curve groups. For sending a signed message from A to B, both have to agree up on **Elliptic Curve domain parameters**. Sender ‘A’ have a key pair consisting of a private key dA (a randomly selected integer less than n, where n is the order of the curve, an elliptic curve domain parameter) and a public key QA = dA * G (G is the generator point, an elliptic curve domain parameter). An overview of ECDSA process is defined below.
+
+ECDSA has three phases -
+* **key generation**
+* **signature generation**
+* **signature verification**
+
+
+### ECDSA Key Generation
+
+An entity A’s key pair is associated with a particular set of EC domain parameters D= (q, FR, a, b, G, n, h). E is an elliptic curve defined over Fq , and P is a point of prime order n in E(Fq), q is a prime. Each entity A does the following -
+
+1. Select a random integer d in the interval [1, n- 1]. 
+2. Compute Q = dP.
+3. A’s public key is Q, A’s private key is d.
+
+
+### ECDSA Signature Generation
+
+To sign a message m, an entity A with domain parameters D= (q,
+FR, a, b, G, n, h) does the following -
+
+1. Select a random or pseudorandom integer k in the interval [1, n-1].
+2. Compute kP =x1, y1 and r= x1 mod(n) (where x1 is regarded as an integer between 0 and q-1). If r= 0 then go back to step 1.
+3. Compute k^(-1) mod(n).
+4. Compute s= k^(-1) {h(m)+ dr} mod(n), where h is the Secure Hash Algorithm (SHA-1). If s = 0, then go back to step 1.
+5. The signature for the message m is the pair of integers (r, s).
+
+
+### ECDSA Signature Verification
+
+To verify A’s signature (r, s) on m, B obtains an authenticated copy of A’s domain parameters D = (q, FR, a, b, G, n, h) and public key Q and do the following -
+
+1. Verify that r and s are integers in the interval [1, n-1].
+2. Compute w = s^(-1)mod(n) and h(m)
+3. Compute u1 =h(m)w mod(n) and u2 =rw mod(n).
+4. Compute u1P + u2Q =(x0, y0) and v= x0 mod(n).
+5. Accept the signature if and only if v = r
+
+
+![ScreenShot](/images/siggen.png)
+
+
+![ScreenShot](/images/sigver.png)
 
 
 
 ## TODO
 
-* **ECDSA**
 
 * **ECDH**
