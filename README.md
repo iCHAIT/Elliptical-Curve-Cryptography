@@ -9,7 +9,7 @@ In public key cryptography each user or the device taking part in the communicat
 
 The public key is a point on the curve and the private key is a random number. The public key is obtained by multiplying the private key with a generator point G in the curve.
 
-The mathematical operations of ECC is defined over the elliptic curve **y2 = x3 + ax + b**, where **4a3 + 27b2 ≠ 0**. Each value of the ‘a’ and ‘b’ gives a different elliptic curve.
+The mathematical operations of ECC is defined over the elliptic curve **y^2 = x^3 + ax + b**, where **4a^3 + 27b^2 ≠ 0**. Each value of the ‘a’ and ‘b’ gives a different elliptic curve.
 
 One main **advantage** of ECC is its **small key size**. A 160-bit key in ECC is considered to be as secured as 1024-bit key in RSA.
 
