@@ -45,9 +45,75 @@ To double a point J to get L, i.e. to find L = 2J, consider a point J on an elli
 Thus **L = 2J**.
 
 
-## TODO
+## ElGamal Encryption
 
-* **Elgamal**
+In cryptography, the ElGamal encryption system is an **asymmetric key encryption** algorithm for **public-key** cryptography which is based on the **Diffie–Hellman key exchange**. It was described by Taher Elgamal in 1985.
+
+ElGamal encryption consists of three components -
+
+* **The key generator**
+* **The encryption algorithm**
+* **The decryption algorithm**
+
+
+### Key Generation
+
+The key generator works as follows -
+
+* Alice generates an efficient description of a cyclic group G\, of order q\, with generator g\,.
+* Alice chooses a random x\, from \{1, \ldots, q-1\}.
+* Alice computes h = g^x\,.
+* Alice publishes h\,, along with the description of G, q, g\,, as her public key. Alice retains x\, as her private key which must be kept secret.
+
+
+### Encryption
+
+The encryption algorithm works as follows - to encrypt a message m\, to Alice under her public key (G,q,g,h)\,
+
+* Bob chooses a random y\, from \{1, \ldots, q-1\}, then calculates c_1=g^y\,.
+* Bob calculates the shared secret s=h^y\,.
+* Bob converts his secret message m\, into an element m'\, of G\,.
+* Bob calculates c_2=m'\cdot s.
+* Bob sends the ciphertext (c_1,c_2)=(g^y, m'\cdot h^y)=(g^y, m'\cdot(g^x)^y)\, to Alice.
+
+Note that one can easily find h^y\, if one knows m'\,. Therefore, a new y\, is generated for every message to improve security. For this reason, y\, is also called an ephemeral key.
+
+
+### Decryption
+
+The decryption algorithm works as follows: to decrypt a ciphertext (c_1,c_2)\, with her private key x\,,
+
+* Alice calculates the shared secret s=c_1^x\,
+* and then computes m'=c_2 \cdot s^{-1}\, which she then converts back into the plaintext message m\,, where s^{-1} is the inverse of s in the group G.
+The decryption algorithm produces the intended message, since
+ c_2 \cdot s^{-1} = m'\cdot h^y \cdot (g^{xy})^{-1} = m'\cdot g^{xy} \cdot g^{-xy} = m'.
+
+
+### Security
+
+The security of the ElGamal scheme depends on the properties of the underlying group G as well as any padding scheme used on the messages.
+
+If the **computational Diffie–Hellman assumption (CDH)** holds in the underlying cyclic group G, then the encryption function is **one-way**.
+
+If the **decisional Diffie–Hellman assumption (DDH)** holds in G, then ElGamal achieves **semantic security**.
+
+ElGamal encryption is unconditionally malleable, and therefore is not secure under chosen ciphertext attack. For example, given an encryption (c_1, c_2) of some (possibly unknown) message m, one can easily construct a valid encryption (c_1, 2 c_2) of the message 2m.
+
+To achieve chosen-ciphertext security, the scheme must be further modified, or an appropriate padding scheme must be used.
+
+
+ElGamal has the **disadvantage** that the ciphertext is twice as long as the plaintext.
+
+It has the **advantage** the same plaintext gives a different ciphertext (with near certainty) each time it is encrypted
+
+
+### Example
+
+![ScreenShot](/images/elgamal.png)
+
+
+
+## TODO* 
 
 * **ECDSA**
 
