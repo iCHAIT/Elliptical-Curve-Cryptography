@@ -148,6 +148,11 @@ FR, a, b, G, n, h) does the following -
 5. The signature for the message m is the pair of integers (r, s).
 
 
+
+![ScreenShot](/images/siggen.png)
+
+
+
 ### ECDSA Signature Verification
 
 To verify A’s signature (r, s) on m, B obtains an authenticated copy of A’s domain parameters D = (q, FR, a, b, G, n, h) and public key Q and do the following -
@@ -159,14 +164,29 @@ To verify A’s signature (r, s) on m, B obtains an authenticated copy of A’s 
 5. Accept the signature if and only if v = r
 
 
-![ScreenShot](/images/siggen.png)
-
 
 ![ScreenShot](/images/sigver.png)
 
 
 
-## TODO
+## ECDH(Elliptic curve Diffie–Hellman)
+
+Elliptic curve Diffie–Hellman (ECDH) is an anonymous **key agreement protocol**that allows two parties, each having an elliptic curve **public–private key pair**, to establish a **shared secret** over an insecure channel.
+This shared secret may be directly used as a key, or to derive another key which can then be used to encrypt subsequent communications using a symmetric key cipher.
+
+Both parties exchange some public information to each other. Using this public data and their own private data these parties calculates the shared secret. Any third party, who doesn’t have access to the private details of each device, will not be able to calculate the shared secret from the available public information.
+
+An overview of ECDH process is defined below -
+
+For generating a shared secret between A and B using ECDH, both have to agree up on Elliptic Curve domain parameters. Both end have a key pair consisting of a **private key d** (a randomly selected integer less than n, where n is the order of the curve, an elliptic curve domain parameter) and a **public key Q = d * G** (G is the generator point, an elliptic curve domain parameter). Let **(dA, QA)** be the private key - public key pair of A and **(dB, QB)** be the private key - public key pair of B.
+
+1. The end A computes K = (xK,yK) = dA *QB
+2. The end B computes L = (xL,yL) = dB *QA
+3. Since dA*QB = dA*dB*G = dB*dA*G = dB*QA. Therefore K = L and hence xK = xL
+4. Hence the shared secret is xK
+
+Since it is practically impossible to find the private key dA or dB from the public key K or L, its not possible to obtain the shared secret for a third party.
 
 
-* **ECDH**
+
+![ScreenShot](/images/ecdh.png)
