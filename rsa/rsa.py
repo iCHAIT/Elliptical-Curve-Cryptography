@@ -8,13 +8,13 @@ import sympy
 
 a = raw_input("Enter a large prime no P:")
 
-b = raw_input("Enter another large prime no Q:")
-
 p = int(a)
 
 if not sympy.isprime(p):
     print "ERROR p is not prime"
     sys.exit()
+
+b = raw_input("Enter another large prime no Q:")
 
 q = int(b)
 
