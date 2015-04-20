@@ -37,4 +37,16 @@ for i in range(1, n-1):
 
 
 print "Public Key is:", e, n
-print "Private Key is:", d, n
+# print "Private Key is:", d, n
+
+msg = raw_input("Enter the message:")
+
+m = int(msg)
+
+c = pow(m, e) % n
+
+print "Encrypted message is:", c
+
+l = pow(c, d) % n
+
+print "Decrypted message is:", l
