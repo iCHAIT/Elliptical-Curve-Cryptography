@@ -8,12 +8,12 @@ import os
 import collections
 import base64
 import os
+
 def inv(n, q):
     """div on PN modulo a/b mod q as a * inv(b, q) mod q
     >>> assert n * inv(n, q) % q == 1
     """
     return egcd(n, q)[0] % q
- 
  
 def egcd(a, b):
     """extended GCD
@@ -42,9 +42,6 @@ def inv2(n, q):
         pass
     return s
  
- 
- 
- 
 def sqrt(n, q):
     """sqrtmod for bigint
     - Algorithm 3.34 of http://www.cacr.math.uwaterloo.ca/hac/about/chap3.pdf
@@ -70,7 +67,6 @@ def sqrt(n, q):
         c = pow(c, 2, q)
         pass
     return (r, q - r)
- 
  
 def jacobi(a, q):
     """jacobi symbol: judge existing sqrtmod (1: exist, -1: not exist)
@@ -102,7 +98,6 @@ def jacobi2(a, q):
     return s if a1 == 1 else s * jacobi2(q % a1, a1)
 
 Coord = collections.namedtuple("Coord", ["x", "y"])
- 
  
 class EC(object):
     """System of Elliptic Curve"""
@@ -202,7 +197,6 @@ class EC(object):
         raise Exception("Invalid order")
     pass
  
- 
 class DiffieHellman(object):
     """Elliptic Curve Diffie Hellman (Key Agreement)
     - ec: elliptic curve
@@ -230,9 +224,6 @@ class DiffieHellman(object):
         return self.ec.mul(pub, priv)
     pass
  
-
- 
- 
 if __name__ == "__main__":
     print(" Enter file name")
     name=raw_input()
@@ -242,7 +233,7 @@ if __name__ == "__main__":
     txt = f.read()
     print '\n Original file contents are :'
     print txt
-    # shared elliptic curve system of examples
+    # shared ell curve system of examples
     print "\n Enter curve parameters (a,b,q) y^2 = x^3 +ax + b (mod q)"
     a=int(raw_input())#1
     b=int(raw_input())#18
@@ -272,6 +263,7 @@ if __name__ == "__main__":
     assert dh.secret(apriv, bpub) == dh.secret(bpriv, apub)
     a=(dh.secret(bpriv,apub))
     print "\n Shared key is" , a
+
 BLOCK_SIZE = 32
 PADDING = '{'
  
