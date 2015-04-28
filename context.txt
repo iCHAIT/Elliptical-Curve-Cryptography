@@ -1,8 +1,0 @@
-hey my name is aman. my sub-group is me and ameen who is very meen. lol
-ill implement DH key exchange using ecc ie, ECDH.
-My group has 5 memebers and we will togther implement 
-	1. ECDH
-	2. EL-gamal ECC
-	3. ECDSA
-Topic 3 is out punishment for not completing our work on time. :)
-Now i got to go. Bye
