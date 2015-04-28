@@ -68,37 +68,7 @@ class MainWindow(QtGui.QWidget):
         label_c = QtGui.QLabel("Enter value of n (private key):")
 
         # ECDH
-        labele1 = QtGui.QLabel("DIFFIE HELMAN EQUATION")
-        labele2 = QtGui.QLabel("y3 = x2 + ax + b( mod q )")
-        labele1.setStyleSheet('font-size: 13pt')
-        labele2.setStyleSheet('font-size: 12pt')
-        labela = QtGui.QLabel("Enter value of a:")
-        labelb = QtGui.QLabel("Enter value of b:")
-        labelc = QtGui.QLabel("Enter value of q (prime):")
-        label_PrivA = QtGui.QLabel("Enter Private Key of A:")
-        label_PrivB = QtGui.QLabel("Enter Private Key of B:")
-
-        textEdit = QtGui.QTextEdit()
-        button_file = QtGui.QPushButton("Import File") 
-        button_encrypt = QtGui.QPushButton("Encrypt") 
-        button_decrypt = QtGui.QPushButton("Decrypt") 
-        button_file.clicked.connect(self.importfile)        
-        button_encrypt.clicked.connect(self.ecdhencrypt)        
-        button_decrypt.clicked.connect(self.ecdhdecrypt)        
-        self.vala = QtGui.QTextEdit()
-        self.valb = QtGui.QTextEdit()
-        self.valc = QtGui.QTextEdit()  
-        self.apriv = QtGui.QTextEdit()  
-        self.bpriv = QtGui.QTextEdit()  
-        self.textEdit = QtGui.QTextEdit()  
-        self.vala.setMaximumHeight(labela.sizeHint().height()*2)
-        self.valb.setMaximumHeight(labelb.sizeHint().height()*2)
-        self.valc.setMaximumHeight(labelc.sizeHint().height()*2)
-        hbox = QtGui.QHBoxLayout()
-        hbox1 = QtGui.QHBoxLayout()
-        vbox1 = QtGui.QHBoxLayout()
-        vbox2 = QtGui.QHBoxLayout()
-
+        
         #ELGAMAL
         self.val_a = QtGui.QTextEdit()
         self.val_b = QtGui.QTextEdit()
@@ -110,8 +80,6 @@ class MainWindow(QtGui.QWidget):
         self.val_a.setMaximumHeight(label_a.sizeHint().height()*2)
         self.val_b.setMaximumHeight(label_b.sizeHint().height()*2)
         self.val_c.setMaximumHeight(label_c.sizeHint().height()*2)
-        self.apriv.setMaximumHeight(label_c.sizeHint().height()*2)
-        self.bpriv.setMaximumHeight(label_c.sizeHint().height()*2)
        
         # TAB FOR CURVE / ELGAMAL
         p1_vertical.addWidget(label_a)
@@ -141,7 +109,42 @@ class MainWindow(QtGui.QWidget):
     
 
 #ECDH CODE--------------------------------------------------------------------------------------------
-        # ECDH GUI 
+        # ECDH GUI DECLARATIONS
+        labele1 = QtGui.QLabel("DIFFIE HELMAN EQUATION")
+        labele2 = QtGui.QLabel("y3 = x2 + ax + b( mod q )")
+        labele1.setStyleSheet('font-size: 13pt')
+        labele2.setStyleSheet('font-size: 12pt')
+        labela = QtGui.QLabel("Enter value of a:")
+        labelb = QtGui.QLabel("Enter value of b:")
+        labelc = QtGui.QLabel("Enter value of q (prime):")
+        label_PrivA = QtGui.QLabel("Enter Private Key of A:")
+        label_PrivB = QtGui.QLabel("Enter Private Key of B:")
+        label_result = QtGui.QLabel("ENCODED/DECODED TEXT")
+        label_result.setStyleSheet('font-size: 12pt')
+        textEdit = QtGui.QTextEdit()
+        button_file = QtGui.QPushButton("Import File") 
+        button_encrypt = QtGui.QPushButton("Encrypt") 
+        button_decrypt = QtGui.QPushButton("Decrypt") 
+        button_file.clicked.connect(self.importfile)        
+        button_encrypt.clicked.connect(self.ecdhencrypt)        
+        button_decrypt.clicked.connect(self.ecdhdecrypt)        
+        self.vala = QtGui.QTextEdit()
+        self.valb = QtGui.QTextEdit()
+        self.valc = QtGui.QTextEdit()  
+        self.apriv = QtGui.QTextEdit()  
+        self.bpriv = QtGui.QTextEdit()  
+        self.textEdit = QtGui.QTextEdit()  
+        self.vala.setMaximumHeight(labela.sizeHint().height()*2)
+        self.valb.setMaximumHeight(labelb.sizeHint().height()*2)
+        self.valc.setMaximumHeight(labelc.sizeHint().height()*2)        
+        self.apriv.setMaximumHeight(label_c.sizeHint().height()*2)
+        self.bpriv.setMaximumHeight(label_c.sizeHint().height()*2)
+        hbox = QtGui.QHBoxLayout()
+        hbox1 = QtGui.QHBoxLayout()
+        vbox1 = QtGui.QHBoxLayout()
+        vbox2 = QtGui.QHBoxLayout()
+
+        # GUI LAYOUT
         p3_vertical.addWidget(labele1)
         p3_vertical.addWidget(labele2)
         vbox1.addWidget(labela)
@@ -158,19 +161,18 @@ class MainWindow(QtGui.QWidget):
         p3_vertical.addWidget(label_PrivB)
         p3_vertical.addWidget(self.bpriv)
         p3_vertical.addWidget(button_file)
+        p3_vertical.addWidget(label_result)
         p3_vertical.addWidget(self.textEdit)
-        # p3_vertical.addStretch(1)
         hbox.addWidget(button_encrypt)
         hbox.addWidget(button_decrypt)
         p3_vertical.addStretch(1)
         p3_vertical.addLayout(hbox)
 
-
         vbox = QtGui.QVBoxLayout() 
         vbox.addWidget(self.tab_widget) 
-         
         self.setLayout(vbox) 
-     
+    
+    #GUI Functionality
     def ecdhencrypt(self):
         global A,B,C,PrivA,PrivB
         A = int(self.vala.toPlainText())
@@ -233,7 +235,7 @@ class MainWindow(QtGui.QWidget):
         f = open(fname, 'r')        
         with f:        
             data = f.read()
-    # ------------------------------------------------------------------------------------------------
+# ________________________________________________________________________________________________________
     def generateprime(self):
         global a
         global b
