@@ -88,7 +88,7 @@ def jacobi2(a, q):
     if q % 4 == 3 and a1 % 4 == 3: s = -s
     return s if a1 == 1 else s * jacobi2(q % a1, a1)
 
-Coord = collections.namedtuple("Coord", ["x", "y"])
+Coord = collections.namedtuple("Coord", ["x", "y"]) #ALTER
  
 class EC(object):
     """System of Elliptic Curve"""
@@ -166,12 +166,17 @@ class EC(object):
         """
         r = self.zero
         m2 = p
+        # O(log2(n)) add
         while 0 < n:
             if n & 1 == 1:
                 r = self.add(r, m2)
                 pass
             n, m2 = n >> 1, self.add(m2, m2)
             pass
+        # [ref] O(n) add
+        #for i in range(n):
+        #    r = self.add(r, p)
+        #    pass
         return r
  
     def order(self, g):
@@ -187,6 +192,7 @@ class EC(object):
             pass
         raise Exception("Invalid order")
     pass
+ 
  
 class DiffieHellman(object):
     """Elliptic Curve Diffie Hellman (Key Agreement)
