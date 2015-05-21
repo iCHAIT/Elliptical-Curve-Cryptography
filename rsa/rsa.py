@@ -1,9 +1,6 @@
-import os
 import sys
-import numpy
 import random
 from fractions import gcd
-import math
 import sympy
 
 a = raw_input("Enter a large prime no P:")
@@ -27,7 +24,8 @@ f = (p-1)*(q-1)
 n = p*q
 
 while 1:
-    e = random.randint(1, f) # Choosing a random no. e such that 1<e<f and e is coprime to f
+    # Choosing a random no. e such that 1<e<f and e is coprime to f
+    e = random.randint(1, f)
     if gcd(e, f) == 1:   # Condition for coprime
         break
 
@@ -47,7 +45,6 @@ cipher_enc = []
 for c in msg:
     cipher_enc.append(pow(ord(c), e, n))
 print "Encrypted message:", cipher_enc
-
 
 cipher_dec = []
 
