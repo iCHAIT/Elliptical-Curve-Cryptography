@@ -3,6 +3,7 @@ import collections
 import hashlib
 from hashlib import md5
 
+
 def inv(n, q):
     """div on PN modulo a/b mod q as a * inv(b, q) mod q
     >>> assert n * inv(n, q) % q == 1
@@ -32,14 +33,16 @@ Coord = collections.namedtuple("Coord", ["x", "y"])
 
 
 class EC(object):
+
     """System of Elliptic Curve"""
+
     def __init__(self, a, b, q):
         """elliptic curve as: (y**2 = x**3 + a * x + b) mod q
         - a, b: params of curve formula
         - q: prime number
         """
         assert 0 < a and a < q and 0 < b and b < q and q > 2
-        assert (4 * (a ** 3) + 27 * (b ** 2))  % q != 0
+        assert (4 * (a ** 3) + 27 * (b ** 2)) % q != 0
         self.a = a
         self.b = b
         self.q = q
@@ -48,7 +51,8 @@ class EC(object):
         pass
 
     def is_valid(self, p):
-        if p == self.zero: return True
+        if p == self.zero:
+            return True
         l = (p.y ** 2) % self.q
         r = ((p.x ** 3) + self.a * p.x + self.b) % self.q
         return l == r
@@ -83,8 +87,10 @@ class EC(object):
         >>> assert ec.add(a, b) == ec.add(b, a)
         >>> assert ec.add(a, ec.add(b, c)) == ec.add(ec.add(a, b), c)
         """
-        if p1 == self.zero: return p2
-        if p2 == self.zero: return p1
+        if p1 == self.zero:
+            return p2
+        if p2 == self.zero:
+            return p1
         if p1.x == p2.x and (p1.y != p2.y or p1.y == 0):
             # p1 + -p1 == 0
             return self.zero
@@ -115,7 +121,7 @@ class EC(object):
             n, m2 = n >> 1, self.add(m2, m2)
             pass
         # [ref] O(n) add
-        #for i in range(n):
+        # for i in range(n):
         #    r = self.add(r, p)
         #    pass
         return r
@@ -134,11 +140,14 @@ class EC(object):
         raise Exception("Invalid order")
     pass
 
+
 class DSA(object):
+
     """ECDSA
     - ec: elliptic curve
     - g: a point on ec
     """
+
     def __init__(self, ec, g):
         self.ec = ec
         self.g = g
@@ -154,7 +163,7 @@ class DSA(object):
         """generate signature
         - hashval: hash value of message as int
         - priv: priv key as int
-        - r: random int 
+        - r: random int
         - returns: signature as (int, int)
         """
         assert 0 < r and r < self.n
@@ -177,39 +186,38 @@ class DSA(object):
 
 if __name__ == "__main__":
     # shared elliptic curve system of examples
-    
+
     a = int(raw_input("enter curve parameter 'a': "))
     b = int(raw_input("enter curve parameter 'b': "))
     q = int(raw_input("enter prime number 'q' (prime number): "))
     ec = EC(a, b, q)
-    
-    # produce generator point 
+
+    # produce generator point
     g, _ = ec.at(7)
     assert ec.order(g) <= ec.q
-       
+
     # ECDSA usage
     dsa = DSA(ec, g)
-    
 
     priv = int(raw_input("enter private key: "))
     pub = dsa.gen(priv)
     msg = str(raw_input("enter message: "))
     hashval = int("0x" + hashlib.md5(msg).hexdigest(), 16)
-    
+
     # # hashval = 0
     # for a in msg :
     #     hashval += ord(a)
-    r = 7 
-    
+    r = 7
+
     sig = dsa.sign(hashval, priv, r)
     print "signature generated: "
-    print sig 
+    print sig
     msg_rec = str(raw_input("enter the message received: "))
     # for a in msg_rec :
-        # hashval_rec += ord(a)
+    # hashval_rec += ord(a)
     hashval_rec = int("0x" + hashlib.md5(msg_rec).hexdigest(), 16)
     if dsa.validate(hashval_rec, sig, pub) == True:
         print "Message verified to be authentic."
-    else :
+    else:
         print "Message not authentic!"
     pass
